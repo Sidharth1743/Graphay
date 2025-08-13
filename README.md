@@ -1,12 +1,8 @@
-
-
-# **Graphay**: AI-Powered Financial Process Automation 💰
+# **Graphay**: AI-Powered Financial Process Automation
 Graphay, is an AI-powered financial process automation system designed to streamline and manage the entire lifecycle of an invoice, from initial receipt to final payment confirmation. Leveraging the LangGraph library, this system orchestrates a multi-step workflow, integrating various services and including human-in-the-loop checkpoints to ensure accuracy and compliance.
-
-
 ---
 
-## Project Overview & Core Functionality 🚀
+## Project Overview & Core Functionality
 
 Graphay automates a complex accounts payable workflow by creating a stateful agent that intelligently manages the process for each invoice. The core of the system is a **Python**-based application using **LangGraph** to define and execute the workflow as a stateful graph. This approach allows for robust, concurrent processing of multiple invoices while handling asynchronous human-in-the-loop tasks efficiently.
 
@@ -57,7 +53,7 @@ Graphay automates a complex accounts payable workflow by creating a stateful age
 
 ---
 
-### **Installation**
+## **Installation**
 
 ```bash
 # Clone the repository
@@ -67,9 +63,25 @@ cd graphay
 # Install dependencies
 pip install -r req.txt
 
-
 # Copy environment variables
 cp .env.example .env
 ```
+---
+## Technical Details & Design
+
+### Orchestration with LangGraph
+
+The heart of this system is a **stateful graph** built with **LangGraph**. The graph's state is a dictionary that holds all relevant invoice data at each step (e.g., vendor name, status, approval decision, transaction ID). Each step in the workflow is a **node** in the graph, with edges defining the flow based on the current state.
+
+This design enables:
+
+  * **Asynchronous Checkpoints**: Nodes like `await_approval` are designed to pause the graph's execution for a specific invoice until a condition is met (e.g., a Discord message is received). This non-blocking approach ensures the system can continue processing other invoices concurrently.
+  * **Error Handling & Retries**: The graph can be configured with error-handling logic to manage failed tool calls or invalid data, routing the process to a specific node for resolution.
 
 ---
+## 🤝 Contributing
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Push to branch
+5. Open a Pull Request
